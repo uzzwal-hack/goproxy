@@ -4,7 +4,7 @@ FROM golang:1.26-alpine AS builder
 WORKDIR /app
 COPY . .
 # No need for go mod tidy, the original code should build fine with the new Go version
-RUN go mod download
+RUN go mod tidy
 RUN CGO_ENABLED=0 GOOS=linux go build -o proxy
 
 FROM alpine:latest
